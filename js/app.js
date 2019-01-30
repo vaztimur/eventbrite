@@ -14,7 +14,7 @@ document.getElementById('submitBtn').addEventListener('click', (e)=>{
             .then (events => {
                 const eventList = events.events.events
                if (eventList.length > 0) {
-                    
+                    ui.displayEvents(eventList);
                } else {
                 ui.printMessage('No results found', 'text-center alert alert-danger mt-4');
                }

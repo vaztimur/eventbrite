@@ -2,8 +2,11 @@ class UI {
     constructor (){
         // App initialization
         this.init();
+
+        this.result = document.getElementById('result');
     }
     init(){
+        
         // Displays Categories in <select> tag
         this.printCategories();
     }
@@ -45,4 +48,35 @@ class UI {
         alert.remove();
    }
 }
+    // Display events from the API
+    displayEvents(events){
+       
+
+        // Template for the results
+        let htmlTemplate = "";
+
+        events.forEach(singleEvent =>{
+            htmlTemplate += `
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="img-fluid mb-2" src="${singleEvent.logo != null ? singleEvent.logo.url : ""}">
+                        </div>
+                        </div class="class-body">
+                            <h2 class="text-center card-title">${singleEvent.name.text}</h2>
+                            <p class="lead text-info">Event Information:</p>
+                            <p>${singleEvent.description.text.substring(0,200)}...</p>
+                            <span class="badge badge-primary">Capacity: ${singleEvent.capacity}</span>
+                            <span class="badge badge-secondary">Date & Time: ${singleEvent.start.local}</span>
+                            <a class="btn btn-primary btn-block" href="${singleEvent.url}" target="_blank">Get Ticket</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        })
+        this.result.innerHTML = htmlTemplate;
+
+    }
+
+
 }
